@@ -1,0 +1,157 @@
+\section{m-Schritt Seed-Bank Modell}
+Nun haben wir die Werkzeuge um das Wright Fischer Modell zu verallgemeinern. Im Vergleich zum klassichen Wright Fischer Modell, wo sich jedes Individuum nur aus der vorherigen Generation ein Vorfahren aussucht, kann im m-Schritt Seed-Bank Modell ein Vorfahren aus einem der letzten m Generationen ausgesucht werden. Genauer gesagt, ein Individuum der nächsten Generation sucht sich zuerst mit Wahrscheinlichkeit $b_i, i \in \{1..m\}$ die Generation aus \textcolor{red}{irgendwie vorherige noch spezifizieren}, von welcher er den Vorfahren aussucht, und anschließend wählt er sich aus der ausgewählten Generation ein Individuum gleichverteilt aus. Wir beginnen mit der formalen Definition.
+\begin{Definition}[Ahnenprozess des m-Schritt Seed-Bank Modells]
+    Für $N \in \mathbb{N}$ sei
+    \[
+        A^N_{r,i}, r \in \mathbb{N}, i \in [N]
+    \]
+    eine Familie von unabhängigen $E_{N,m}$-wertigen Zufallsvariablen auf $(\Omega,\mathcal{F},\mathbb{P})$. Hier bezeichnet 
+    \[
+        E_{N,m} := [N] \times [m] = \{(i,j) | i \in \{1,2,...,N\}, j \in \{1,2,...,m\}\}
+    \] 
+    die Menge der Tupeln wo die erste Komponente das Wright-Fischer Modell Analogon ist, und die zweite Komponente der Zahl der Generation in der Vergangenheit, aus der geerbt wurde, entspricht. Wir fordern zusätzlich zu der Wright-Fischer Annahme, dass die erste Komponente unabhängig und gleichverteilt auf $[N]$ ist, dass auch die zweite Komponente unabhängig, aber verteilt ist zu der Verteilung $\mathbb{P}(X = i) = b_i$ \textcolor{red}{fix}. 
+    Für jedes $r \in \mathbb{N}$ heißt
+    \[  
+        A^N_r := (A^N_{r,1},...,A^N_{r,N}) \in (E_{N,m})^N
+    \]
+    die Ahnenkonfiguration in Generation $r$. Der resultierende $(E_{N,m})^N$-wertige stochastische Prozess
+    \[
+        \{A^N_r\}_{r \in \mathbb{N}}
+    \]
+    heißt Ahnenprozess des m-Shritt Seed-Bank Modells.
+    
+\end{Definition}
+Diesmal beruht das Kingman-ähnliche Resultat nicht auf dem Ahnenlinienprozess selber, sondern betrachtet die Anzahl Ahnenlinien, welche durch den Ahnenprozess gegeben sind. Dafür beschränken wir die Stichprobe nicht nur auf eine Generation, sondern betrachten sogennante $m$-Fenster, und definieren:
+\begin{Definition}[m-Fenster]
+    Mit einem m-Fenster bezeichnen wir die geordnete Sammlung von m Generationen $(r,r+1,...,r + (m-1)), r,m \in \mathbb{N}$
+\end{Definition}
+
+\begin{Definition}[Ahnenlinienprozess einer Stichprobe]
+    \label{definition X_i}
+    Sei $A^{N}_r$ der Ahnenprozess eines m-Schritt Seed-Bank Modells mit Generationen $r \in \mathbb{Z}$. Sei $S_n:= \{(x_i,y_i): i \in \{1,...,n\}\} \subset [N]\times \{0,...,m-1\}$ eine beliebige Stichprobe von Individuen im m-Fenster der Generation 0. Dann definieren wir $X^n(k):= (X^n_1(k),X^n_2(k),...,X^n_m(k))$, wobei 
+\[
+    X^n_i(k) := |\{A^N_{i,x_i}[k]: (x_i,i) \subset S_n\}|
+\]
+\textcolor{red}{wrong definition}
+als den Vektor der Anzahl von übrig gebliebenen disjunkten Individuen im m-Fenster von vor k-Generationen und nennen $X^n_i$ den Konfigurationsprozess. 
+\end{Definition}
+Nun wollen wir unser $m$-Fenster in jeder Generation neu verschieben und die Anzahl der Übrig gebliebener Individuen aufzählen. Dafür definieren wir:
+\begin{Definition}
+    \label{def pi process}
+    Für einen Konfigurationsprozess $X^n_i(k)$ aus \ref{definition X_i}, definieren wir 
+    \[
+        |\Pi_k^{n,N}| := \sum_{i = 1}^m X^n_i(k)
+    \]
+    als Gesamtanzahl von disjunkten Vorfahren einer n-Stichprobe von vor $k$ Generationen
+\end{Definition}
+Beginnend mit einer Stichprobe der Größe $n$ im ersten m-Fenster beruht die Konvergenz auf der Zufallsvariable $|\Pi^{n,N}_k|$. Dafür führen wir zuerst den langsameren Kingman-Koaleszenten ein.
+
+
+\textcolor{red}{add smth about why next def and theorem is relevant}
+\begin{Definition}
+    Sei $n \in \mathbb{N}$. Der m-Schritt Kingman n-Koaleszent ist die zeitstetige $[n]$-wertige Markov-Kette $\{|\Pi^n_t|, t \geq 0\}$ mit Q-Matrix gegeben durch
+    \begin{equation}
+        q_{i,j} =
+        \begin{cases}
+            \beta_1^2\binom{i}{2} & \text{falls } j = i-1  \\
+            -\beta_1\binom{i}{2} & \text{falls } i = j\\
+            0  & \text{sonst}
+       \end{cases}
+    \end{equation}
+wobei $\beta_1 := 1 / \mathbb{E}[B] = 1 / (\sum_{i=1}^{m}ib_i)$
+\textcolor{red}{define beta}
+\end{Definition}
+
+\begin{theorem}[Haupttheorem]
+    Sei $|\Pi^n_t|$ der m-Schritt Kingman Koaleszent und $|\Pi_k^{n,N}|$ wie in \ref{def pi process} . Dann gilt für $N \to \infty$
+\begin{equation}
+    |\Pi_{\lfloor Nt \rfloor}^n| \to |\Pi_t^n|   
+\end{equation}
+in Verteilung auf dem Raum der càdlàg-Pfade auf $[n]$
+\end{theorem}
+\textcolor{red}{add preamble about showing c2n and c3n for classic kingman coalescent has same necessity as here}
+Wir berechnen nun die Wahrscheinlichkeiten, dass von einer Generation auf die nächste, keine, eine oder mehrere Verschmelzungen vorkommen. Die Wahrscheinlichkeit, dass in einem Schritt eine Verschmelzung \textcolor{red}{Zelle define} vorkommt, gegeben $r$ Bälle landen im nächsten Schritt in dieser Zelle und es gibt $l$ alte Bälle, ist gegeben durch:
+
+\begin{align*}
+    \mathbb{P}(\text{keine Verschmelzung}) &= (1-\frac{l}{N})(1-\frac{l+1}{N})...(1-\frac{l+r-1}{N}) \\
+                                           &= (1 - \frac{\sum_{i=l}^{r+l-1} i}{N}) + \mathcal{O}(\frac{1}{N^2}) \\
+                                           &= 1 - \frac{1 }{N}(lr + \binom{r}{2}) + \mathcal{O}(\frac{1}{N^2})
+\end{align*}
+Analog folgt
+\begin{align}
+    \mathbb{P}(\text{Genau eine Verschmelzung}) &= (1-\frac{l}{N})(1-\frac{l+1}{N})...(1-\frac{l+r-2}{N})(\frac{l}{N}) \nonumber \\
+                                                &+ (1-\frac{l}{N})(1-\frac{l+1}{N})...(1-\frac{l+r-2}{N})(\frac{l+1}{N}) \nonumber \\
+                                               + ... &+ (1-\frac{l}{N})(1-\frac{l+1}{N})...(1-\frac{l+r-2}{N})(\frac{l + r -1 }{N}) \nonumber\\
+                                                     &= (1-\frac{l}{N})(1-\frac{l+1}{N})...(1-\frac{l+r-2}{N})(\frac{\sum_{i = l}^{r + l -1 }i }{N}) \nonumber\\
+                                                     &= \frac{1}{N}(lr + \binom{r}{2}) + \mathcal{O}(\frac{1}{N^2}) \label{one coal}
+\end{align}
+Und somit 
+\begin{align*}
+    \mathbb{P}(\geq \text{2 Verschmelzungen}) &= \mathcal{O}(\frac{1}{N^2}) \\
+\end{align*}
+Diese Bedingung ähnelt der Bedingung im Wright Fischer Modell, wobei $<$...\textcolor{red}{add later} durch ... ersetzt haben. \\
+Nun betrachten wir diese Wahrscheinlichkeiten zusammen mit der Bedingung auf die multinomiale Verteilung der Bälle. Dafür definieren wir $R(k+1):= (R_1(k+1),R_2(k+1),...,R_m(k+1))$, als die Anzahl verlegten Individuen die in der ersten, zweiten ... m-ten Generation nach der $-(k+1)$-ten Generation landen. 
+Nach Konstruktion vom Prozess, gilt:
+\[
+    R(k+1) \sim Mult(X_1(k);b_1,...,b_m)
+    \]
+Gegeben $X(k)$ und $R(k+1)$, gilt:
+\begin{equation}
+    X_i(k+1) = 
+    \begin{cases}
+        X_{i+1}(k) + R_i(k+1), &\text{falls keine Verschmelzung}\\
+        X_{i+1}(k) + R_i(k+1) - 1, &\text{falls eine Verschmelzung},
+    \end{cases}
+\end{equation}
+wobei der zweite Fall wegen \ref{one coal} mit Wahrscheinlichkeit 
+\[
+    \frac{1}{N}\left(X_{i+1}(k)R_i(k+1) + \binom{R_i(k+1)}{2}\right) + \mathcal{O}\left(\frac{1}{N^2}\right)
+\]
+passiert (Die Fälle mit Wahrscheinlichkeit $\mathcal{O}\left(\frac{1}{N^2}\right)$ wurden ignoriert). Falls wir nun $\sigma$ als ein Verschiebungsoperator
+\[
+    \sigma(X_1(k),...,X_m(k)) := (X_2(k),...X_m(k),0)
+\]
+und 
+\[
+    a_i(k) := X_{i+1}(k)R_i(k+1) + \binom{R_i(k+1)}{2}
+\]
+definieren
+so bekommen wir insgesamt für die Übergänge von $X^n(k)$
+
+\begin{equation}
+    X^n(k+1) = 
+    \begin{cases}
+        \sigma(X^n(k)) + R(k+1), &\text{mit W-keit } 1 - \frac{1}{N}\sum_{i=1}^{m} a_i(k) + \mathcal{O}\left(\frac{1}{N^2}\right)\\
+        \sigma(X^n(k)) + R(k+1) - e_i, &\text{mit W-keit } \frac{1}{N}a_i(k) + \mathcal{O}\left(\frac{1}{N^2}\right)\\
+        \text{sonstige Konfiguration} , &\text{mit W-keit } \mathcal{O} \left(\frac{1}{N^2}\right) 
+    \end{cases}
+\end{equation}
+Falls wir also die Koaleszenz-Wahrscheinlichkeit gegeben einer Konfiguration berechnen wollen, so bekommen wir
+\begin{align}
+    &\mathbb{P}(\text{genau eine Verschmelzung }| X^n(k))  \\
+    = &\mathbb{E}[\mathbb{P}(\text{genau eine Verschmelzung }| X^n(k), R(k+1))|X^n(k)] \\
+    = &\mathbb{E}[\frac{1}{N} \sum_{i=1}^{m-1} X_{i+1}(k)R_i(k+1) + \frac{1}{N}\sum_{i=1}^{m}\binom{R_i(k+1)}{2} + \mathcal{O}\left(\frac{1}{N^2}\right)| X^n(k)] \\
+    = &\frac{1}{N} X_1(k)\sum_{i=1}^{m-1} X_{i+1}(k)b_i + \frac{1}{N}\binom{X_1(k)}{2}\sum_{i=1}^{m}b_i^2 + \mathcal{O}\left(\frac{1}{N^2}\right) \\
+\end{align}
+wobei $R_i(k+1) \sim Bin(X_1(k),b_i)$ ausgenutzt wurde.
+Also für eine konkrete Konfiguration bekommen wir:
+\begin{align}
+    &\mathbb{P}(\text{genau eine Verschmelzung im nächsten Schritt}| X^n(k) = (x_1,...,x_m)  \\
+    = &\frac{1}{N}\left( x_1\sum_{i=1}^{m-1} x_{i+1}b_i + \binom{x_1}{2}\sum_{i=1}^{m}b_i^2 \right) + \mathcal{O}\left(\frac{1}{N^2}\right) \\
+\end{align}
+
+
+
+
+
+\begin{theorem}
+    
+    Seien $E,E_1,E_2,...$ metrische Räume mit $E$ lokal kompakt und separabel. Für $n = 1,2,...$ sei $\gamma_n : E_n \to E $ messbar, sei $\mu_n(x,\Gamma)$ eine Übergangs Funktion auf $E_n \times \mathcal{B}(E_n)$ und $\{Y_n(k), k = 0,1,2,...\}$ eine Markov Kette in $E_n$, welche Übergänge durch $\mu_n$ gegeben hat. Sei $\epsilon_n > 0$ mit $\lim_{n \to \infty} \epsilon_n = 0$. Definiere
+    $X_n(t) = \gamma_n(Y_n([t/\epsilon_n]))$,
+    \[
+        T_n f(x) = \int f(y) \mu_n(x,dy), \quad f \in B(E_n),
+    \]
+    und $\pi_n: B(E) \to B(E_n)$ durch 
+    
+\end{theorem}
+

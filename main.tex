@@ -1,0 +1,71 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{cite}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{graphicx}
+\usepackage{fullpage}
+%\usepackage{soul}
+\usepackage[german]{babel}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+%\usepackage{amssymb}
+%\usepackage{paralist}
+%\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{setspace}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{xspace}
+\usepackage{listings}
+\usepackage{fontawesome}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{soul}
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+\newtheoremstyle{nonitalic}
+  {\topsep}   % Space above
+  {\topsep}   % Space below
+  {\normalfont}  % Body font
+  {}          % Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries} % Theorem head font
+  {.}         % Punctuation after theorem head
+  { }         % Space after theorem head (\newline = linebreak)
+  {}          % Theorem head spec (can be left empty, meaning ‘normal’)
+\newtheorem{theorem}{Satz}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{Beweis}[theorem]{Beweis}
+\newtheorem{Korollar}[theorem]{Korollar}
+\newtheorem{Definition}{Definition}
+\theoremstyle{nonitalic}
+\newtheorem*{Notation}{Notation}
+\newtheorem*{Beispiel}{Beispiel}
+\newtheorem{Bemerkung}{Bemerkung}
+\newtheorem*{Konstruktion*}{Konstruktion}
+\newcommand{\PsubT}{\text{Principal subtree }}
+\newcommand{\linpreft}{\text{linear preferential attachment trees }}
+
+
+
+% Title Page
+% LTeX: language=de-DE
+\begin{document}
+\allowdisplaybreaks
+\author{Victor Velesco}
+\chapter{Seminar}
+\input{chapters/chapter1}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+
+%\section{Einleitung}
+\bibliographystyle{plain}
+\bibliography{Sources/Stochastik_Literatur}
+\end{document}

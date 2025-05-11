@@ -1,0 +1,51 @@
+\section{Klassische Kingman Koaleszent}
+Bevor wir mit Verallgemeinerungen vom Wright Fischer Modell beginnen, führen wir zuerst die klassiche Theorie des Kingman Koaleszenten ein. Anstatt, wie in der klassischen Theorie die viel allgemeineren Canningsmodelle zu betrachten, beschränken wir uns im folgenden Abschnitt nur auf das Wright Fischer Modell. Wir beginnen mit der Notation, welche wir von \cite{blath} übernehmen. 
+
+\begin{Definition}[Ahnenprozess des Wright Fischer Modells]
+    Für $N \in \mathbb{N}$ sei
+    \[
+        A^N_{r,i}, r \in \mathbb{N}, i \in [N]
+    \]
+    eine Familie von unabhängigen $[N]$-wertigen gleichverteilten Zufallsvariablen auf $(\Omega,\mathcal{F},\mathbb{P})$. Für jedes $r \in \mathbb{N}$ heißt
+    \[  
+        A^N_r := (A^N_{r,1},...,A^N_{r,N}) \in [N]^N
+    \]
+    die Ahnenkonfiguration in Generation $r$. Der resultierende $[N]^N$-wertige stochastische Prozess
+    \[
+        \{A^N_r\}_{r \in \mathbb{N}}
+    \]
+    heißt Ahnenprozess des Wright-Fischer-Modells.
+    
+\end{Definition}
+Wir interpretieren die Definition als: jedes Individuum in der derzeitigen Generation sucht sich gleichverteilt ein Vorfahren aus der vorherigen Generation aus und erbt die Gene davon (wir nehmen an, die Individuen sind Haploid).
+
+\begin{Definition}[Ahnenlinienprozess einer Stichprobe]
+    Sei $A^{N}_r$ der Ahnenprozess eines Wright-Fischer-Modells mit Generationen $r \in \mathbb{Z}$. Der Ahnenlinienprozess $\{\Pi^{n,N}_k\}_{k\geq0}$ einer Stichprobe der Größe $n \in [N]$, startend in Generation $k = 0$, ist eine $P^{(n)}$-wertige Markovkette, wobei fur jedes $k \geq 0$ die Blöcke von $\Pi^{n,N}_k$
+    durch die Aquivalenzrelation 
+\[
+    i \sim_k j : \iff A^{(N,\mu)}_{0,i}[k] = A^{(N,\mu)}_{0,j}[k]
+\]
+    gegeben sind. Damit sind die Übergange des Ahnlinienprozesses der Stichprobe (Vorwärts in der Zeit) durch die Dynamik des Ahnenprozesses ruckwärts in der Zeit gegeben.
+\end{Definition}
+\textcolor{red}{add smth about why next def and theorem is relevant}
+\begin{Definition}(Kingman, 1982)
+    Sei $n \in \mathbb{N}$. Der Kingman n-Koaleszent ist die zeitstetige $\mathcal{P}^{(n)}$-wertige Markov-Kette $\{\Pi^n_t, t \geq 0\}$ mit Q-Matrix gegeben durch
+    \begin{equation}
+        q_{\xi,\eta} =
+        \begin{cases}
+            1 & \text{falls } \xi \prec \eta \\
+            -\binom{|\xi|}{2} & \text{falls } \xi = \eta \\
+            0  & \text{sonst}
+       \end{cases}
+    \end{equation}
+\end{Definition}
+
+
+Das Haupttheorem besagt
+\begin{theorem}
+    Sei $\{ \Pi_k^{(N,\nu)}\}_{k \geq 0}$ der Ahnenlinienprozess einer Stichprobe der Größe $n$ in einem Wright-Fischer-Modell mit Populationsgröße $N$. Dann gilt für $N \to \infty$
+\[
+    \{ \Pi^{n,(N,\nu)}_{\lfloor tN\rfloor}\}_{t \geq 0} \to \{\Pi^n_t\}_{t \geq 0}
+\]
+im Sinne der endlich-dimensionalen Verteilungen (und in Verteilung auf dem Raum der càdlàg-Pfade auf $P^{(n)}$)
+\end{theorem}
